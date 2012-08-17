@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - 5.3
+
+mysql:
+  database: drupal
+  username: root
+  encoding: utf8
+  
+before_script:
+  - "mysql -e 'create database drupal;'"
+  - pear channel-discover pear.drush.org
+  - pear install drush/drush
+  - phpenv rehash
+  - drush make springboard.make ../springboard
+  - cd ../springboard
+  - sudo chmod -R 777 sites/
+  - drush si springboard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=J@ckson1! --site-mail=jr+travis@jacksonriver.com --site-name="Springboard CI" --yes
+  - drush cc all --yes
+
+script: 
+  - test -d profiles/springboard/fundraiser
