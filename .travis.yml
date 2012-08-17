@@ -13,8 +13,8 @@ before_script:
   - pear channel-discover pear.drush.org
   - pear install drush/drush
   - phpenv rehash
-  - drush make springboard.make ../springboard
-  - cd ../springboard
+  - drush make springboard.make ../springboard_dev.jr
+  - cd ../springboard_dev.jr
   - sudo chmod -R 777 sites/
   - drush si springboard --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=J@ckson1! --site-mail=jr+travis@jacksonriver.com --site-name="Springboard CI" --yes
   - drush cc all --yes
