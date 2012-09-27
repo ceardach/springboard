@@ -290,8 +290,10 @@ function springboard_map_salesforce_contacts() {
     
      $exists = db_result(db_query("SELECT COUNT(*) FROM {webform} WHERE nid = %d", $node->nid));
      if (!$exists) {
-       db_query("INSERT INTO {webform} VALUES (%d, '%s', %d, '%s', %d, %d, %d, %d, %d, %d, '%s', %d, %d)",
-       $node->nid, 'Thanks!', 0, '<confirmation>', 1, 0, 0, 0, 0, 1, '', -1, -1);
+       $row = new stdClass;
+       $row->nid = $node->nid;
+       $row->confirmation = 'Thanks!';
+       drupal_write_record('webform', $row);
      }
 }
 
